@@ -18,6 +18,7 @@ func main() {
 
 	maleoCmd.AddCommand(cmd.VersionCmd)
 	maleoCmd.AddCommand(cmd.BalancesCmd())
+	maleoCmd.AddCommand(cmd.TxCmd())
 
 	err := maleoCmd.Execute()
 	if err != nil {

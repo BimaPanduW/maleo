@@ -2,6 +2,6 @@
     "genesis_time": "2021-09-12T00:00:00.000000000Z",
     "chain_id": "the-maleo-blockchain-bar-ledger",
     "balances": {
-        "bimapanduwiguna": 1000000000000
+        "bimap": 1000000
     }
 }
