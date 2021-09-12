@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/maleo/cmd"
 	"github.com/spf13/cobra"
 )
 
@@ -15,8 +16,8 @@ func main() {
 		},
 	}
 
-	maleoCmd.AddCommand(versionCmd)
-	maleoCmd.AddCommand(balancesCmd())
+	maleoCmd.AddCommand(cmd.VersionCmd)
+	maleoCmd.AddCommand(cmd.BalancesCmd())
 
 	err := maleoCmd.Execute()
 	if err != nil {

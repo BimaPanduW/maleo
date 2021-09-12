@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"fmt"
@@ -14,7 +14,7 @@ const flagTo = "to"
 const flagValue = "value"
 const flagData = "data"
 
-func txCmd() *cobra.Command {
+func TxCmd() *cobra.Command {
 	var txsCmd = &cobra.Command{
 		Use:   "tx",
 		Short: "Interact with txs (add...).",
@@ -24,6 +24,8 @@ func txCmd() *cobra.Command {
 		Run: func(cmd *cobra.Command, args []string) {
 		},
 	}
+
+	txsCmd.AddCommand(txAddCmd())
 
 	return txsCmd
 }
