@@ -40,34 +40,28 @@ func txAddCmd() *cobra.Command {
 			value, _ := cmd.Flags().GetUint(flagValue)
 			data, _ := cmd.Flags().GetString(flagData)
 
-			fromAcc := database.NewAccount(from)
-			toAcc := database.NewAccount(to)
-
-			newTx := database.NewTx(fromAcc, toAcc, value, data)
+			tx := database.NewTx(database.NewAccount(from), database.NewAccount(to), value, data)
 
 			state, err := database.NewStateFromDisk()
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)
 				os.Exit(1)
 			}
-
 			defer state.Close()
 
-			// Add the TX to an in-memory array (pool)
-			err = state.Add(newTx)
+			err = state.AddTx(tx)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)
 				os.Exit(1)
 			}
 
-			// Flush the mempool TXs to disk
 			_, err = state.Persist()
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)
 				os.Exit(1)
 			}
 
-			fmt.Println("TX successfully added to the ledger.")
+			fmt.Println("TX successfully persisted to the ledger.")
 		},
 	}
 
@@ -81,5 +75,6 @@ func txAddCmd() *cobra.Command {
 	cmd.MarkFlagRequired(flagValue)
 
 	cmd.Flags().String(flagData, "", "Possible values: 'reward'")
+
 	return cmd
 }
