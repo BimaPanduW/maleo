@@ -15,6 +15,8 @@ func main() {
 		},
 	}
 
+	maleoCmd.AddCommand(versionCmd)
+
 	err := maleoCmd.Execute()
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
